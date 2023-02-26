@@ -48,36 +48,33 @@ namespace apiRnM.Services
 
         public string GetPersonData(string PersonName)
         {
-            var persons = _apiCaller.GetPersons(PersonName);
+            var persons = _apiCaller.GetPersons(PersonName).First();
 
             List<PersonResponse> personResponse = new List<PersonResponse>();
 
-            for(int counter = 0; counter < persons.Count; counter++)
+            var origin = persons.origin.ToString();
+            var jelement = JsonDocument.Parse(origin).RootElement;
+            var location = _apiCaller.GetDataFromApi(jelement.GetProperty("url").ToString());
+            var parsedLocation = new Location();
+
+            //TO EDIT encoding
+            if (location != null)
+                parsedLocation = JsonSerializer.Deserialize<Location>(location);
+
+            personResponse.Add(new PersonResponse()
             {
-                var origin = persons[counter].origin.ToString();
-                var jelement = JsonDocument.Parse(origin).RootElement;
-                var location = _apiCaller.GetDataFromApi(jelement.GetProperty("url").ToString());
-                var parsedLocation = new Location();
-
-                //TO EDIT encoding
-                if (location != null)
-                    parsedLocation = JsonSerializer.Deserialize<Location>(location);
-
-                personResponse.Add(new PersonResponse()
+                name = persons.name,
+                gender = persons.gender,
+                species = persons.species,
+                status = persons.status,
+                type = persons.type,
+                origin = new Origin
                 {
-                    name = persons[0].name,
-                    gender = persons[0].gender,
-                    species = persons[0].species,
-                    status = persons[0].status,
-                    type = persons[0].type,
-                    origin = new Origin
-                    {
-                        name = parsedLocation.name,
-                        dimension = parsedLocation.dimension,
-                        type = parsedLocation.type
-                    }
-                });
-            }
+                    name = parsedLocation.name,
+                    dimension = parsedLocation.dimension,
+                    type = parsedLocation.type
+                }
+            });
 
             var response = JsonSerializer.Serialize(personResponse);
             return response;
