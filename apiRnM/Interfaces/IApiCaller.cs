@@ -1,4 +1,6 @@
-﻿namespace apiRnM.Interfaces
+﻿using System.Text.Json;
+
+namespace apiRnM.Interfaces
 {
     public interface IApiCaller
     {

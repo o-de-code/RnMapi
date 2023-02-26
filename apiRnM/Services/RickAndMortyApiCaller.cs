@@ -23,6 +23,7 @@ namespace apiRnM.Services
         private HttpClient client = new HttpClient();
 
         string queryParamsName = "/?name=";
+        string resultProperty = "results";
 
 
         public RickAndMortyApiCaller(IOptions<RnMAppSettings> RnMSettings)
@@ -35,7 +36,7 @@ namespace apiRnM.Services
             var url = string.Concat(RnMSettings.characters, queryParamsName, name.ToLower());
             var personResult = new List<Person>();
 
-            var characters = GetDataFromApi(url);    
+            var characters = GetDataFromApiFromSection(url, resultProperty);    
 
             if(characters != null)
                 personResult = JsonSerializer.Deserialize<List<Person>>(characters);
@@ -48,7 +49,7 @@ namespace apiRnM.Services
             var url = string.Concat(RnMSettings.episodes, queryParamsName, episode.ToLower());
             var episodeResult = new List<Episode>();
 
-            var episodes = GetDataFromApi(url);
+            var episodes = GetDataFromApiFromSection(url, resultProperty);
 
             if (episodes != null)
                 episodeResult = JsonSerializer.Deserialize<List<Episode>>(episodes);
@@ -61,7 +62,7 @@ namespace apiRnM.Services
             var url = string.Concat(RnMSettings.locations, queryParamsName, location.ToLower());
             var locationResult = new List<Location>();
 
-            var locations = GetDataFromApi(url);
+            var locations = GetDataFromApiFromSection(url, resultProperty);
 
             if (locations != null)
                 locationResult = JsonSerializer.Deserialize<List<Location>>(locations);
@@ -74,19 +75,24 @@ namespace apiRnM.Services
         {
             try
             {
-                var response = client.GetStringAsync(url).Result;
-
-                var jdoc = JsonDocument.Parse(response);
-
-                var jel = jdoc.RootElement;
-
-                return jel.GetProperty("results").ToString();
+                return client.GetStringAsync(url).Result;    
             }
             catch
             {
                 return null;
             }
             
+        }
+
+        private string GetDataFromApiFromSection(string url, string property)
+        {
+            var response = GetDataFromApi(url);
+            
+            if (response == null)
+                return null;
+
+            var jElement = JsonDocument.Parse(response).RootElement;
+            return jElement.GetProperty(property).ToString();
         }
     }
 }

@@ -3,7 +3,10 @@ using apiRnM.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 
 namespace apiRnM.Services
 {
@@ -43,33 +46,40 @@ namespace apiRnM.Services
             return false;
         }
 
-        public JsonResult GetPersonData(string PersonName)
+        public string GetPersonData(string PersonName)
         {
             var persons = _apiCaller.GetPersons(PersonName);
-            List<Location> locations = null;
-            List<PersonResponse> personResponse = null;
 
-            foreach (var person in persons)
-            {
-                var or = person.origin.ToString();
-                var jdoc = JsonDocument.Parse(or);
-
-                var jel = jdoc.RootElement;
-
-                var location = _apiCaller.GetDataFromApi(jel.GetProperty("url").ToString());
-
-                if (location != null)
-                    locations.Add(JsonSerializer.Deserialize<List<Location>>(location).First());
-            }
+            List<PersonResponse> personResponse = new List<PersonResponse>();
 
             for(int counter = 0; counter < persons.Count; counter++)
             {
                 var origin = persons[counter].origin.ToString();
                 var jelement = JsonDocument.Parse(origin).RootElement;
-                var 
+                var location = _apiCaller.GetDataFromApi(jelement.GetProperty("url").ToString());
+                var parsedLocation = new Location();
+
+                //TO EDIT encoding
+                if (location != null)
+                    parsedLocation = JsonSerializer.Deserialize<Location>(location);
+
+                personResponse.Add(new PersonResponse()
+                {
+                    name = persons[0].name,
+                    gender = persons[0].gender,
+                    species = persons[0].species,
+                    status = persons[0].status,
+                    type = persons[0].type,
+                    origin = new Origin
+                    {
+                        name = parsedLocation.name,
+                        dimension = parsedLocation.dimension,
+                        type = parsedLocation.type
+                    }
+                });
             }
 
-            var response = new JsonResult(persons);
+            var response = JsonSerializer.Serialize(personResponse);
             return response;
         }
     }

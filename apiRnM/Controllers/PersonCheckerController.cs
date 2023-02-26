@@ -27,9 +27,12 @@ namespace apiRnM.Controllers
         public ActionResult<string> Person(string name)
         {
             if (name is null)
-                return NotFound();
+                return NotFound("Not Found");
 
-            JsonResult result = _proceeder.GetPersonData(name.ToLower());
+            string result = _proceeder.GetPersonData(name.ToLower());
+
+            if (result == null || result == "[]")
+                return NotFound("Not Found");
 
             return result;
         }
@@ -47,7 +50,7 @@ namespace apiRnM.Controllers
             var result = _proceeder.CheckPersonInEpisode(name, episode, out found);
 
             if (!found)
-                return NotFound();
+                return NotFound("Not Found");
 
             return result;
         }
