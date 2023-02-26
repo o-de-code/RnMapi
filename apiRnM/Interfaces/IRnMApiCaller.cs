@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using System.Threading.Tasks;
-using apiRnM.Models;
+﻿using apiRnM.Models;
 using System.Collections.Generic;
 
 namespace apiRnM.Interfaces

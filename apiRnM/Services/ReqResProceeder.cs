@@ -1,12 +1,8 @@
 ﻿using apiRnM.Interfaces;
 using apiRnM.Models;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 
 namespace apiRnM.Services
 {
