@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using apiRnM.Utils;
+using apiRnM.Interfaces;
+using apiRnM.Services;
 
 namespace apiRnM
 {
@@ -26,6 +29,13 @@ namespace apiRnM
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            var RnMSources = Configuration.GetSection("RnM_sources");
+            services.Configure<RnMAppSettings>(RnMSources);
+
+            services.AddScoped<IRnMApiCaller, RickAndMortyApiCaller>();
+
+            services.AddScoped<IProceeder, ReqResProceeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
