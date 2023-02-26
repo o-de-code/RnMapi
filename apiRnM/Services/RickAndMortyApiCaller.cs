@@ -2,18 +2,10 @@
 using apiRnM.Models;
 using Microsoft.Extensions.Options;
 using apiRnM.Utils;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Xml.Linq;
-using System;
-using System.Net;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Microsoft.AspNetCore.Routing.Template;
-using System.Runtime.InteropServices;
+
 
 namespace apiRnM.Services
 {

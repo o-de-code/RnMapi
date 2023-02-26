@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Net.Http;
-using System;
-using System.Web;
+﻿using Microsoft.AspNetCore.Mvc;
 using apiRnM.Interfaces;
 using apiRnM.Utils;
-using System.Xml.Linq;
-using System.Net;
+
 
 namespace apiRnM.Controllers
 {
@@ -23,6 +17,7 @@ namespace apiRnM.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(Duration = 20)]
         [Route("person")]
         public ActionResult<string> Person(string name)
         {
@@ -38,6 +33,7 @@ namespace apiRnM.Controllers
         }
 
         [HttpPost]
+        [ResponseCache(Duration=20)]
         [Route("check-person")]
         public ActionResult<bool> CheckPerson([FromBody] RequestBodyCheckPersonEpisode body)
         {
