@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\apiRnM\\apiRnM\\apiRnM.csproj": {}
+    "C:\\Users\\Ol\\source\\repos\\RnMapi\\apiRnM\\apiRnM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\apiRnM\\apiRnM\\apiRnM.csproj": {
+    "C:\\Users\\Ol\\source\\repos\\RnMapi\\apiRnM\\apiRnM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\apiRnM\\apiRnM\\apiRnM.csproj",
+        "projectUniqueName": "C:\\Users\\Ol\\source\\repos\\RnMapi\\apiRnM\\apiRnM.csproj",
         "projectName": "apiRnM",
-        "projectPath": "C:\\Users\\User\\source\\repos\\apiRnM\\apiRnM\\apiRnM.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\apiRnM\\apiRnM\\obj\\",
+        "projectPath": "C:\\Users\\Ol\\source\\repos\\RnMapi\\apiRnM\\apiRnM.csproj",
+        "packagesPath": "C:\\Users\\Ol\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ol\\source\\repos\\RnMapi\\apiRnM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -56,12 +56,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.29, 3.1.29]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -70,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
